@@ -39,6 +39,31 @@ If you want Nmap to use TCP SYN ping, you can do so via the option -PS followed 
 #TCP ACK Ping
 By default, port 80 is used. The syntax is similar to TCP SYN ping. -PA should be followed by a port number, range, list, or a combination of them. For example, consider -PA21, -PA21-25 and -PA80,443,8080. If no port is specified, port 80 will be used.
 
+#UDP Ping
+Nmap uses -PU for UDP ping
+
+#Masscan
+masscan MACHINE_IP/24 -p443
+masscan MACHINE_IP/24 -p80,443
+masscan MACHINE_IP/24 -p22-25
+masscan MACHINE_IP/24 ‐‐top-ports 100
+
+To install masscan:
+apt install masscan
+
+#Reverse DNS lookup
+-n to skip the reverse DNS loopkup
+option -R to query the DNS server even for offline hosts
+If you want to use a specific DNS server, you can add the --dns-servers DNS_SERVER
+
+#NMAP six states:
+1. Open: indicates that a service is listening on the specified port.
+2. Closed: indicates that no service is listening on the specified port, although the port is accessible. By accessible, we mean that it is reachable and is not blocked by a firewall or other security appliances/programs.
+3. Filtered: means that Nmap cannot determine if the port is open or closed because the port is not accessible. This state is usually due to a firewall preventing Nmap from reaching that port. Nmap’s packets may be blocked from reaching the port; alternatively, the responses are blocked from reaching Nmap’s host.
+4. Unfiltered: means that Nmap cannot determine if the port is open or closed, although the port is accessible. This state is encountered when using an ACK scan -sA.
+5. Open|Filtered: This means that Nmap cannot determine whether the port is open or filtered.
+6. Closed|Filtered: This means that Nmap cannot decide whether a port is closed or filtered.
+
 
 
 
